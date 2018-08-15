@@ -1,0 +1,1736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>富电充电运营管理平台测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 0.8.2.1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    
+<style type="text/css" media="screen">
+body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+table       { font-size: 100%; }
+/* -- heading ---------------------------------------------------------------------- */
+.heading {
+    margin-top: 0ex;
+    margin-bottom: 1ex;
+}
+.heading .description {
+    margin-top: 4ex;
+    margin-bottom: 6ex;
+}
+/* -- report ------------------------------------------------------------------------ */
+#total_row  { font-weight: bold; }
+.passCase   { color: #5cb85c; }
+.failCase   { color: #d9534f; font-weight: bold; }
+.errorCase  { color: #f0ad4e; font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+</style>
+
+</head>
+<body >
+<script language="javascript" type="text/javascript">
+output_list = Array();
+/*level 调整增加只显示通过用例的分类 --Findyou
+0:Summary //all hiddenRow
+1:Failed  //pt hiddenRow, ft none
+2:Pass    //pt none, ft hiddenRow
+3:All     //pt none, ft none
+*/
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level == 2 || level == 0 ) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level < 2) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+    }
+    //加入【详细】切换文字变化 --Findyou
+    detail_class=document.getElementsByClassName('detail');
+	//console.log(detail_class.length)
+	if (level == 3) {
+		for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="收起"
+		}
+	}
+	else{
+			for (var i = 0; i < detail_class.length; i++){
+			detail_class[i].innerHTML="详细"
+		}
+	}
+}
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        //ID修改 点 为 下划线 -Findyou
+        tid0 = 't' + cid.substr(1) + '_' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        //修改点击无法收起的BUG，加入【详细】切换文字变化 --Findyou
+        if (toHide) {
+            document.getElementById(tid).className = 'hiddenRow';
+            document.getElementById(cid).innerText = "详细"
+        }
+        else {
+            document.getElementById(tid).className = '';
+            document.getElementById(cid).innerText = "收起"
+        }
+    }
+}
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+</script>
+<div class='heading'>
+<h1 style="font-family: Microsoft YaHei">富电充电运营管理平台测试报告</h1>
+<p class='attribute'><strong>测试人员 : </strong> 张秀丽</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-08-13 16:30:00</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:54:35.931000</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 167，通过 152，失败 12，错误 3，通过率= 91.02%</p>
+
+<p class='description'>富电充电运营管理后台自动化测试报告</p>
+</div>
+
+
+<p id='show_detail_line'>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 91.02% }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 12 }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 152 }</a>
+<a class="btn btn-info" href='javascript:showCase(3)'>所有{ 167 }</a>
+</p>
+<table id='result_table' class="table table-condensed table-bordered table-hover">
+<colgroup>
+<col align='left' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+<col align='right' />
+</colgroup>
+<tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
+    <td>用例集/测试用例</td>
+    <td>总计</td>
+    <td>通过</td>
+    <td>失败</td>
+    <td>错误</td>
+    <td>详细</td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>1authority_management.test01_accountManagement.accountManagement</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',1)" class="detail" id='c1'>详细</a></td>
+</tr>
+
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test001_accountManagement: 账号管理</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>1authority_management.test02_roleManagement.roleManagement</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',1)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='pt2_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test002_roleManagement: 角色管理</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>2inside_management.test03_insideManagement.insideManagement: 内部管理</td>
+    <td class="text-center">10</td>
+    <td class="text-center">9</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c3',10)" class="detail" id='c3'>详细</a></td>
+</tr>
+
+<tr id='pt3_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test003_insideCharge: 内部充值</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test004_cardType: 按卡类型搜索</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test005_cardGroup: 按卡组名称搜索</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test006_cardNum: 按卡号搜索</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test007_cardState: 按卡状态搜索</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test008_cardHolder: 根据持卡人查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test009_ID: 根据身份证号码查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test010_time: 发卡时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt3_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test011_pageDisplay</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft3_10' class='none'>
+    <td class='failCase'><div class='testcase'>test012_numberDisplay</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft3_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft3_10'>失败</button>
+    <div id='div_ft3_10' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft3_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft3_10'>失败</button>
+    <div id='div_ft3_10' class="collapse in">
+    <pre>
+    
+ft3_10: 100
+每页显示10条出现异常
+Traceback (most recent call last):
+  File "E:\Python\cos\case\2inside_management\test03_insideManagement.py", line 111, in test012_numberDisplay
+    self.assertFalse(text)
+AssertionError: '10' is not false
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>2inside_management.test04_inchargeRecord.insideChargeRecord</td>
+    <td class="text-center">5</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c4',5)" class="detail" id='c4'>详细</a></td>
+</tr>
+
+<tr id='pt4_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test013_insideRecord: 内部充值记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test014_card: 按卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test015_time: 按操作时间查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test016_pageDisplay: 翻页检查</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt4_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test017_numberDisplay: 按每页显示条数查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt4_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt4_5'>通过</button>
+    <div id='div_pt4_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt4_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt4_5'>通过</button>
+    <div id='div_pt4_5' class="collapse in">
+    <pre>
+    
+pt4_5: 10
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>3business_record.test05_chargeRechord.chargeRecord</td>
+    <td class="text-center">8</td>
+    <td class="text-center">7</td>
+    <td class="text-center">0</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c5',8)" class="detail" id='c5'>详细</a></td>
+</tr>
+
+<tr id='pt5_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test018_chargeRecord: 充值记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test019_cardID: 按卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test020_name: 按会员姓名查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test021_phone: 按会员电话查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test022_ID: 按会员证件号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test023_time: 按操作时间查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt5_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test024_pageDisplay: 翻页检查</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft5_8' class='none'>
+    <td class='errorCase'><div class='testcase'>test025_numDisplay: 按每页显示条数查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft5_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft5_8'>错误</button>
+    <div id='div_ft5_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft5_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft5_8'>错误</button>
+    <div id='div_ft5_8' class="collapse in">
+    <pre>
+    
+ft5_8: Traceback (most recent call last):
+  File "E:\Python\cos\case\3business_record\test05_chargeRechord.py", line 83, in test025_numDisplay
+    num = driver.find_element_by_partial_link_text("10").text
+  File "D:\Python27\lib\site-packages\selenium\webdriver\remote\webelement.py", line 68, in text
+    return self._execute(Command.GET_ELEMENT_TEXT)['value']
+  File "D:\Python27\lib\site-packages\selenium\webdriver\remote\webelement.py", line 461, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Python27\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python27\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+StaleElementReferenceException: Message: Element is no longer attached to the DOM
+Stacktrace:
+    at fxdriver.cache.getElementAt (resource://fxdriver/modules/web-element-cache.js:9457)
+    at Utils.getElementAt (file:///c:/users/allen/appdata/local/temp/tmpo4jbxt/webdriver-py-profilecopy/extensions/fxdriver@googlecode.com/components/command-processor.js:9039)
+    at WebElement.getElementText (file:///c:/users/allen/appdata/local/temp/tmpo4jbxt/webdriver-py-profilecopy/extensions/fxdriver@googlecode.com/components/command-processor.js:12092)
+    at DelayedCommand.prototype.executeInternal_/h (file:///c:/users/allen/appdata/local/temp/tmpo4jbxt/webdriver-py-profilecopy/extensions/fxdriver@googlecode.com/components/command-processor.js:12661)
+    at DelayedCommand.prototype.executeInternal_ (file:///c:/users/allen/appdata/local/temp/tmpo4jbxt/webdriver-py-profilecopy/extensions/fxdriver@googlecode.com/components/command-processor.js:12666)
+    at DelayedCommand.prototype.execute/&lt; (file:///c:/users/allen/appdata/local/temp/tmpo4jbxt/webdriver-py-profilecopy/extensions/fxdriver@googlecode.com/components/command-processor.js:12608)
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>3business_record.test06_incomeRecord.incomeRechord</td>
+    <td class="text-center">7</td>
+    <td class="text-center">6</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c6',7)" class="detail" id='c6'>详细</a></td>
+</tr>
+
+<tr id='pt6_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test026_incomeRecord: 收入记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test027_cardID: 按卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test028_identificationNu: 纳税人识别号</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test029_invoiceState: 按发票状态查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test030_operateTime: 按操作时间查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt6_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test031_pageDisplay: 翻页检查</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft6_7' class='none'>
+    <td class='failCase'><div class='testcase'>test032_numDisplay: 每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft6_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft6_7'>失败</button>
+    <div id='div_ft6_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft6_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft6_7'>失败</button>
+    <div id='div_ft6_7' class="collapse in">
+    <pre>
+    
+ft6_7: 100
+每页显示10条出现异常
+Traceback (most recent call last):
+  File "E:\Python\cos\case\3business_record\test06_incomeRecord.py", line 72, in test032_numDisplay
+    self.assertFalse(text)
+AssertionError: '10' is not false
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>3business_record.test07_invoiceRecord.invoiceRecord</td>
+    <td class="text-center">7</td>
+    <td class="text-center">7</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c7',7)" class="detail" id='c7'>详细</a></td>
+</tr>
+
+<tr id='pt7_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test033_invoiceRecord: 发票记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test034_cardID: 按卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test035_texpayerID: 按纳税人识别号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test036_invoiceState: 按发票状态查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test037_invoiceCode: 按发票代码查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test038_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt7_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test039_numberDisplay: 每页展示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt7_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt7_7'>通过</button>
+    <div id='div_pt7_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt7_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt7_7'>通过</button>
+    <div id='div_pt7_7' class="collapse in">
+    <pre>
+    
+pt7_7: 10
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>3business_record.test08_chargeChangeRecord.chargeChangeRecord</td>
+    <td class="text-center">6</td>
+    <td class="text-center">6</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c8',6)" class="detail" id='c8'>详细</a></td>
+</tr>
+
+<tr id='pt8_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test040: 充值变更记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test041: 按卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test042: 按原流水号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test043: 按操作时间查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test044: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt8_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test045: 每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt8_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt8_6'>通过</button>
+    <div id='div_pt8_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt8_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt8_6'>通过</button>
+    <div id='div_pt8_6' class="collapse in">
+    <pre>
+    
+pt8_6: 10
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>3business_record.test09_consumptionRecord.consumptionRecord</td>
+    <td class="text-center">16</td>
+    <td class="text-center">15</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c9',16)" class="detail" id='c9'>详细</a></td>
+</tr>
+
+<tr id='pt9_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test046_consumptionRecord: 消费记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test047_cardID: 按卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test048_name: 按会员姓名查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test049_phone: 按会员电话查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test050_orderState: 按订单结算状态查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test051_machineCode: 按终端机器编码查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test052_organizationName: 按机构名称查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test053_documentID: 按证件号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test054_settlementMethod: 按结算方式查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test055_oprateTime: 按操作时间查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft9_11' class='none'>
+    <td class='failCase'><div class='testcase'>test056_siteName: 按站点名称查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft9_11' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft9_11'>失败</button>
+    <div id='div_ft9_11' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft9_11' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft9_11'>失败</button>
+    <div id='div_ft9_11' class="collapse in">
+    <pre>
+    
+ft9_11: 中国技术交易大厦
+站点搜索结果错误：仅为中国技术交易大厦
+Traceback (most recent call last):
+  File "E:\Python\cos\case\3business_record\test09_consumptionRecord.py", line 116, in test056_siteName
+    self.assertFalse(nowTime)
+AssertionError: '20180813.16.48.09' is not false
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt9_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test057_signMode: 按签权方式查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_13' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test058_orderNum: 按订单号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_14' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test059_export: 导出</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_15' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test060_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt9_16' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test061_numDisplay: 每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt9_16' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt9_16'>通过</button>
+    <div id='div_pt9_16' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt9_16' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt9_16'>通过</button>
+    <div id='div_pt9_16' class="collapse in">
+    <pre>
+    
+pt9_16: 10
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>3business_record.test10_consumptionChangeRecord.consumptionChangeRecord</td>
+    <td class="text-center">5</td>
+    <td class="text-center">4</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c10',5)" class="detail" id='c10'>详细</a></td>
+</tr>
+
+<tr id='pt10_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test062_consumptionChangeRecord: 消费变更记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt10_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test063_cardID: 按卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt10_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test064_oprationTime: 按操作时间查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt10_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test065_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft10_5' class='none'>
+    <td class='failCase'><div class='testcase'>test066_numberDisplay: 每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft10_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft10_5'>失败</button>
+    <div id='div_ft10_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft10_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft10_5'>失败</button>
+    <div id='div_ft10_5' class="collapse in">
+    <pre>
+    
+ft10_5: 100
+每页显示10条出现异常
+Traceback (most recent call last):
+  File "E:\Python\cos\case\3business_record\test10_consumptionChangeRecord.py", line 55, in test066_numberDisplay
+    self.assertFalse(text)
+AssertionError: '10' is not false
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>3business_record.test11_supplementCardRecord.supplementCardRecord</td>
+    <td class="text-center">7</td>
+    <td class="text-center">7</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c11',7)" class="detail" id='c11'>详细</a></td>
+</tr>
+
+<tr id='pt11_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test067_supplementCardRecord: 补卡记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt11_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test068_cardID: 按卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt11_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test069_holderID: 按持卡人身份证查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt11_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test070_oprateTime: 按操作时间查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt11_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test071_export: 导出列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt11_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test072_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt11_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test073_numDisplay: 每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt11_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt11_7'>通过</button>
+    <div id='div_pt11_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt11_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt11_7'>通过</button>
+    <div id='div_pt11_7' class="collapse in">
+    <pre>
+    
+pt11_7: 10
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>3business_record.test12_backCardRecord.backCardRecord</td>
+    <td class="text-center">6</td>
+    <td class="text-center">6</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c12',6)" class="detail" id='c12'>详细</a></td>
+</tr>
+
+<tr id='pt12_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test074_backCardRecord: 退卡记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt12_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test075_cardID: 按卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt12_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test076_oprateTime: 按申请时间查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt12_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test077_export: 导出列表</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt12_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test078_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt12_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test079_numberDisplay: 设置每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt12_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt12_6'>通过</button>
+    <div id='div_pt12_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt12_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt12_6'>通过</button>
+    <div id='div_pt12_6' class="collapse in">
+    <pre>
+    
+pt12_6: 10
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>3business_record.test13_settlementRecord.settlementRecord</td>
+    <td class="text-center">11</td>
+    <td class="text-center">10</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c13',11)" class="detail" id='c13'>详细</a></td>
+</tr>
+
+<tr id='pt13_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test080_settlementRecord: 结算记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt13_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test081_cardID: 按卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt13_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test082_memberName: 按会员姓名查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt13_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test083_phone: 按电话查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt13_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test084_settlementState: 按结算状态查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt13_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test085_certificateID: 按证件号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt13_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test086_oprateTime: 按结算时间查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft13_8' class='none'>
+    <td class='failCase'><div class='testcase'>test087_siteName: 按站点名称查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft13_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft13_8'>失败</button>
+    <div id='div_ft13_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft13_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft13_8'>失败</button>
+    <div id='div_ft13_8' class="collapse in">
+    <pre>
+    
+ft13_8: 中国技术交易大厦
+华贸城充电站
+站点搜索结果错误：仅为华贸城充电站
+Traceback (most recent call last):
+  File "E:\Python\cos\case\3business_record\test13_settlementRecord.py", line 124, in test087_siteName
+    self.assertFalse(nowTime)
+AssertionError: '20180813.16.57.21' is not false
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt13_9' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test088_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt13_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test089_numberDisplay: 每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt13_10' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt13_10'>通过</button>
+    <div id='div_pt13_10' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt13_10' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt13_10'>通过</button>
+    <div id='div_pt13_10' class="collapse in">
+    <pre>
+    
+pt13_10: 10
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt13_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test090_export: 导出</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>3business_record.test14_unlockCardRecord.unlockCardRecord</td>
+    <td class="text-center">6</td>
+    <td class="text-center">6</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c14',6)" class="detail" id='c14'>详细</a></td>
+</tr>
+
+<tr id='pt14_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test091_unlockCardRecord: 解锁卡记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt14_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test092_cardNumber: 按解锁卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt14_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test093_oprateTime: 按解锁时间查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt14_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test094_export: 导出</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt14_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test095_pageDispage: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt14_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test096_numberDispage: 设置每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt14_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt14_6'>通过</button>
+    <div id='div_pt14_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt14_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt14_6'>通过</button>
+    <div id='div_pt14_6' class="collapse in">
+    <pre>
+    
+pt14_6: 10
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>3business_record.test15_anonymousCardRecord.anoymousCardRecord</td>
+    <td class="text-center">9</td>
+    <td class="text-center">7</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c15',9)" class="detail" id='c15'>详细</a></td>
+</tr>
+
+<tr id='pt15_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test097_anoymousCardRecord: 不记名卡消费记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt15_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test098_cardNumber: 按卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt15_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test099_settlementState: 按结算状态查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt15_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test100_machineCode: 按终端机器编码查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt15_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test101_oprateTime: 按操作时间查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft15_6' class='none'>
+    <td class='failCase'><div class='testcase'>test102_siteID: 按站点名称查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft15_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft15_6'>失败</button>
+    <div id='div_ft15_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft15_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft15_6'>失败</button>
+    <div id='div_ft15_6' class="collapse in">
+    <pre>
+    
+ft15_6: 中国技术交易大厦
+站点搜索结果错误：仅为中国技术交易大厦
+Traceback (most recent call last):
+  File "E:\Python\cos\case\3business_record\test15_anonymousCardRecord.py", line 77, in test102_siteID
+    self.assertFalse(nowTime)
+AssertionError: '20180813.17.02.05' is not false
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt15_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test103_export: 导出</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt15_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test104_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft15_9' class='none'>
+    <td class='errorCase'><div class='testcase'>test105_numberDisplay: 设置每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft15_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft15_9'>错误</button>
+    <div id='div_ft15_9' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft15_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft15_9'>错误</button>
+    <div id='div_ft15_9' class="collapse in">
+    <pre>
+    
+ft15_9: Traceback (most recent call last):
+  File "E:\Python\cos\case\3business_record\test15_anonymousCardRecord.py", line 135, in test105_numberDisplay
+    num = driver.find_element_by_partial_link_text("10").text
+  File "D:\Python27\lib\site-packages\selenium\webdriver\remote\webelement.py", line 68, in text
+    return self._execute(Command.GET_ELEMENT_TEXT)['value']
+  File "D:\Python27\lib\site-packages\selenium\webdriver\remote\webelement.py", line 461, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Python27\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python27\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+StaleElementReferenceException: Message: Element is no longer attached to the DOM
+Stacktrace:
+    at fxdriver.cache.getElementAt (resource://fxdriver/modules/web-element-cache.js:9457)
+    at Utils.getElementAt (file:///c:/users/allen/appdata/local/temp/tmpo4jbxt/webdriver-py-profilecopy/extensions/fxdriver@googlecode.com/components/command-processor.js:9039)
+    at WebElement.getElementText (file:///c:/users/allen/appdata/local/temp/tmpo4jbxt/webdriver-py-profilecopy/extensions/fxdriver@googlecode.com/components/command-processor.js:12092)
+    at DelayedCommand.prototype.executeInternal_/h (file:///c:/users/allen/appdata/local/temp/tmpo4jbxt/webdriver-py-profilecopy/extensions/fxdriver@googlecode.com/components/command-processor.js:12661)
+    at DelayedCommand.prototype.executeInternal_ (file:///c:/users/allen/appdata/local/temp/tmpo4jbxt/webdriver-py-profilecopy/extensions/fxdriver@googlecode.com/components/command-processor.js:12666)
+    at DelayedCommand.prototype.execute/&lt; (file:///c:/users/allen/appdata/local/temp/tmpo4jbxt/webdriver-py-profilecopy/extensions/fxdriver@googlecode.com/components/command-processor.js:12608)
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>3business_record.test16_appRecoard.appRecord</td>
+    <td class="text-center">13</td>
+    <td class="text-center">11</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c16',13)" class="detail" id='c16'>详细</a></td>
+</tr>
+
+<tr id='pt16_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test106_appRecord: APP消费记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt16_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test107_cardNum: 按卡号查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt16_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test108_memberName: 按会员姓名查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt16_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test109_phone: 按电话查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt16_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test110_settlementState: 按结算状态查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt16_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test111_machineCode: 按终端机器编码查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt16_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test112_certificatesID: 按证件号码查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt16_8' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test113_oprateTime: 按操作时间查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft16_9' class='none'>
+    <td class='failCase'><div class='testcase'>test114_siteName: 按站点名称进行查询</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft16_9' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft16_9'>失败</button>
+    <div id='div_ft16_9' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft16_9' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft16_9'>失败</button>
+    <div id='div_ft16_9' class="collapse in">
+    <pre>
+    
+ft16_9: 中国技术交易大厦
+华贸城充电站
+站点搜索结果错误：仅为华贸城充电站
+Traceback (most recent call last):
+  File "E:\Python\cos\case\3business_record\test16_appRecoard.py", line 131, in test114_siteName
+    self.assertFalse(nowTime)
+AssertionError: '20180813.17.06.19' is not false
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt16_10' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test115_signMode: 按签权方式进行查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt16_11' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test116_export: 导出</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt16_12' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test117_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft16_13' class='none'>
+    <td class='failCase'><div class='testcase'>test118_numberDisplay: 设置每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft16_13' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft16_13'>失败</button>
+    <div id='div_ft16_13' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft16_13' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft16_13'>失败</button>
+    <div id='div_ft16_13' class="collapse in">
+    <pre>
+    
+ft16_13: 100
+每页显示10条出现异常
+Traceback (most recent call last):
+  File "E:\Python\cos\case\3business_record\test16_appRecoard.py", line 179, in test118_numberDisplay
+    self.assertFalse(text)
+AssertionError: '10' is not false
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>4equipment_management.test17_siteManagement.siteManagement</td>
+    <td class="text-center">6</td>
+    <td class="text-center">5</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c17',6)" class="detail" id='c17'>详细</a></td>
+</tr>
+
+<tr id='pt17_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test119_siteManagement: 站点管理</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt17_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test120_siteCode: 站点编号</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt17_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test121_siteName: 站点名称</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt17_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test122_extport: 导出</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt17_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test123_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft17_6' class='none'>
+    <td class='failCase'><div class='testcase'>test124_numberDisplay: 设置每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft17_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft17_6'>失败</button>
+    <div id='div_ft17_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft17_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft17_6'>失败</button>
+    <div id='div_ft17_6' class="collapse in">
+    <pre>
+    
+ft17_6: 100
+每页显示10条出现异常
+Traceback (most recent call last):
+  File "E:\Python\cos\case\4equipment_management\test17_siteManagement.py", line 112, in test124_numberDisplay
+    self.assertFalse(text)
+AssertionError: '10' is not false
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>4equipment_management.test18_pileManagement.pileManagement</td>
+    <td class="text-center">8</td>
+    <td class="text-center">7</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c18',8)" class="detail" id='c18'>详细</a></td>
+</tr>
+
+<tr id='pt18_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test125_pileManagement: 充电桩管理</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt18_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test126_pileCode: 充电桩编码</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt18_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt18_2'>通过</button>
+    <div id='div_pt18_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt18_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt18_2'>通过</button>
+    <div id='div_pt18_2' class="collapse in">
+    <pre>
+    
+pt18_2: 10
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt18_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test127_machineCode: 终端机器编码</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt18_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test128_siteName: 站点名称</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt18_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt18_4'>通过</button>
+    <div id='div_pt18_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt18_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt18_4'>通过</button>
+    <div id='div_pt18_4' class="collapse in">
+    <pre>
+    
+pt18_4: 中国技术交易大厦
+华贸城充电站
+华贸中心写字楼地下停车场充电站
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt18_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test129_export: 导出</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt18_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test130_add: 添加</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt18_7' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test131_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft18_8' class='none'>
+    <td class='failCase'><div class='testcase'>test132_numDisplay: 设置每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft18_8' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft18_8'>失败</button>
+    <div id='div_ft18_8' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft18_8' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft18_8'>失败</button>
+    <div id='div_ft18_8' class="collapse in">
+    <pre>
+    
+ft18_8: Traceback (most recent call last):
+  File "E:\Python\cos\case\4equipment_management\test18_pileManagement.py", line 180, in test132_numDisplay
+    self.assertFalse(text)
+AssertionError: '10' is not false
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>4equipment_management.test19_strategyManagement.strategyManagement</td>
+    <td class="text-center">5</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c19',5)" class="detail" id='c19'>详细</a></td>
+</tr>
+
+<tr id='pt19_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test133_strategyManagement: 计费策略管理</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt19_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test134_strategyName: 策略名称</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt19_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test135_add: 添加</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt19_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test136_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt19_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test137_numberDisplay: 设置每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt19_5' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt19_5'>通过</button>
+    <div id='div_pt19_5' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt19_5' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt19_5'>通过</button>
+    <div id='div_pt19_5' class="collapse in">
+    <pre>
+    
+pt19_5: 10
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>4equipment_management.test20_functionMonitor.functionMonitor</td>
+    <td class="text-center">2</td>
+    <td class="text-center">2</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c20',2)" class="detail" id='c20'>详细</a></td>
+</tr>
+
+<tr id='pt20_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test138_functionMonitor: 运行监控</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt20_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test139_city: 按城市查询</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>4equipment_management.test21_connectJournal.connectJournal</td>
+    <td class="text-center">5</td>
+    <td class="text-center">5</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c21',5)" class="detail" id='c21'>详细</a></td>
+</tr>
+
+<tr id='pt21_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test140_connectJournal: 连接日志</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt21_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test141_pileCode: 充电桩机器编号</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt21_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test142_city: 站点城市</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt21_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test143_oprate: 操作时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt21_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test144_numDisplay: 每页显示条数</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>4equipment_management.test22_connectTest.connectTest</td>
+    <td class="text-center">3</td>
+    <td class="text-center">3</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c22',3)" class="detail" id='c22'>详细</a></td>
+</tr>
+
+<tr id='pt22_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test145_connectTest: 测试连接</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt22_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test146_productionConnect: 生产连接</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt22_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test147_grayConnect: 灰度连接</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr class='errorClass warning'>
+    <td>4equipment_management.test23_guaranteeRecord.guaranteeRecord</td>
+    <td class="text-center">6</td>
+    <td class="text-center">4</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c23',6)" class="detail" id='c23'>详细</a></td>
+</tr>
+
+<tr id='pt23_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test148_guaranteeRecord: 报修记录</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft23_2' class='none'>
+    <td class='errorCase'><div class='testcase'>test149_guaranteePhone: 报修人手机号</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft23_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft23_2'>错误</button>
+    <div id='div_ft23_2' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft23_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft23_2'>错误</button>
+    <div id='div_ft23_2' class="collapse in">
+    <pre>
+    
+ft23_2: Traceback (most recent call last):
+  File "E:\Python\cos\case\4equipment_management\test23_guaranteeRecord.py", line 34, in test149_guaranteePhone
+    driver.find_elements_by_class_name("button")[0].click()
+  File "D:\Python27\lib\site-packages\selenium\webdriver\remote\webelement.py", line 72, in click
+    self._execute(Command.CLICK_ELEMENT)
+  File "D:\Python27\lib\site-packages\selenium\webdriver\remote\webelement.py", line 461, in _execute
+    return self._parent.execute(command, params)
+  File "D:\Python27\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "D:\Python27\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+WebDriverException: Message: Element is not clickable at point (929, 125). Other element would receive the click: &lt;div style="display: block;" id="alertBackground" class="alertBackground"&gt;&lt;/div&gt;
+
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt23_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test150_guranteeState: 报修状态</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft23_4' class='none'>
+    <td class='failCase'><div class='testcase'>test151_oprateTime: 操作时间</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft23_4' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft23_4'>失败</button>
+    <div id='div_ft23_4' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft23_4' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft23_4'>失败</button>
+    <div id='div_ft23_4' class="collapse in">
+    <pre>
+    
+ft23_4: 筛选异常：对应时间有报修记录，但筛选结果无内容
+Traceback (most recent call last):
+  File "E:\Python\cos\case\4equipment_management\test23_guaranteeRecord.py", line 91, in test151_oprateTime
+    return self.assertFalse(text)
+AssertionError: u'\u6761\uff0c\u5171 0\u6761' is not false
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr id='pt23_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test152_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt23_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test153_numberDisplay: 设置每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt23_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt23_6'>通过</button>
+    <div id='div_pt23_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt23_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt23_6'>通过</button>
+    <div id='div_pt23_6' class="collapse in">
+    <pre>
+    
+pt23_6: 10
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='failClass warning'>
+    <td>5member_management.test24_personalManagement.personalManagement</td>
+    <td class="text-center">7</td>
+    <td class="text-center">6</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c24',7)" class="detail" id='c24'>详细</a></td>
+</tr>
+
+<tr id='pt24_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test156_personalManagement: 个人会员管理</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt24_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test157_memberName: 会员姓名</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt24_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test158_id: 身份证号</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt24_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test159_phone: 电话号码</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt24_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test160_oprateTime: 开户时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt24_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test161_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft24_7' class='none'>
+    <td class='failCase'><div class='testcase'>test162_numberDisplay: 设置每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft24_7' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft24_7'>失败</button>
+    <div id='div_ft24_7' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_ft24_7' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft24_7'>失败</button>
+    <div id='div_ft24_7' class="collapse in">
+    <pre>
+    
+ft24_7: 100
+Traceback (most recent call last):
+  File "E:\Python\cos\case\5member_management\test24_personalManagement.py", line 104, in test162_numberDisplay
+    self.assertFalse(text)
+AssertionError: '10' is not false
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>5member_management.test25_enterpriceManagement.enterpriceManagement</td>
+    <td class="text-center">6</td>
+    <td class="text-center">6</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c25',6)" class="detail" id='c25'>详细</a></td>
+</tr>
+
+<tr id='pt25_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test163_enerpriceManagement: 企业会员管理</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt25_2' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test164_name: 企业名称</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt25_3' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test165_cardID: 卡号</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt25_4' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test166_oprateTime: 开户时间</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt25_5' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test167_pageDisplay: 检查翻页</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='pt25_6' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test168_numberDisplay: 设置每页显示条数</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_pt25_6' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_pt25_6'>通过</button>
+    <div id='div_pt25_6' class="collapse">  -->
+    <!-- 默认展开错误信息 -Findyou -->
+    <button id='btn_pt25_6' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_pt25_6'>通过</button>
+    <div id='div_pt25_6' class="collapse in">
+    <pre>
+    
+pt25_6: 10
+
+
+    </pre>
+    </div>
+    </td>
+</tr>
+
+<tr class='passClass warning'>
+    <td>5member_management.test26_memberRegistor.memberRegistor</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c26',1)" class="detail" id='c26'>详细</a></td>
+</tr>
+
+<tr id='pt26_1' class='hiddenRow'>
+    <td class='passCase'><div class='testcase'>test169_memberRegistor: 会员注册</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='total_row' class="text-center active">
+    <td>总计</td>
+    <td>167</td>
+    <td>152</td>
+    <td>12</td>
+    <td>3</td>
+    <td>通过率：91.02%</td>
+</tr>
+</table>
+
+<div id='ending'>&nbsp;</div>
+    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    </span></a></div>
+    
+</body>
+</html>
